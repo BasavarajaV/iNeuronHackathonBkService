@@ -1,0 +1,891 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "Hackathon-API",
+    "contact": {}
+  },
+  "host": "13.233.178.114:8010",
+  "basePath": "/v1",
+  "securityDefinitions": {},
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "summary": "admin login",
+        "tags": [
+          "auth"
+        ],
+        "operationId": "adminlogin",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "username",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "summary": "logout",
+        "tags": [
+          "auth"
+        ],
+        "operationId": "logout",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/auth/user": {
+      "get": {
+        "summary": "get user info",
+        "tags": [
+          "auth"
+        ],
+        "operationId": "getuserinfo",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/auth/refresh": {
+      "post": {
+        "summary": "refresh access token",
+        "tags": [
+          "auth"
+        ],
+        "operationId": "refreshaccesstoken",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "refresh_token",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/user/add": {
+      "post": {
+        "summary": "add",
+        "tags": [
+          "User apis"
+        ],
+        "operationId": "add",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/addrequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/user/delete": {
+      "post": {
+        "summary": "delete",
+        "tags": [
+          "User apis"
+        ],
+        "operationId": "delete",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/deleterequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/user/all": {
+      "get": {
+        "summary": "get all users",
+        "tags": [
+          "User apis"
+        ],
+        "operationId": "getallusers",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/user/findOne/{id}": {
+      "get": {
+        "summary": "find one user",
+        "tags": [
+          "User apis"
+        ],
+        "operationId": "findoneuser",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/user/update/{id}": {
+      "put": {
+        "summary": "Update user",
+        "tags": [
+          "User apis"
+        ],
+        "operationId": "Updateuser",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/UpdateuserRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/tickets/add": {
+      "post": {
+        "summary": "add",
+        "tags": [
+          "tickets"
+        ],
+        "operationId": "Postadd",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/addrequest1"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/tickets/getTicketsForMentors": {
+      "get": {
+        "summary": "get all tickets for mentors",
+        "tags": [
+          "tickets"
+        ],
+        "operationId": "getallticketsformentors",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/tickets/updateStatus/{id}": {
+      "put": {
+        "summary": "update status by mentor",
+        "tags": [
+          "tickets"
+        ],
+        "operationId": "updatestatusbymentor",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/updatestatusbymentorrequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/queries/add": {
+      "post": {
+        "summary": "add",
+        "tags": [
+          "Queries"
+        ],
+        "operationId": "Postadd1",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/addrequest2"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/queries/getQuery/{id}": {
+      "get": {
+        "summary": "Get query",
+        "tags": [
+          "Queries"
+        ],
+        "operationId": "Getquery",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/queries/getQueries": {
+      "get": {
+        "summary": "get queries",
+        "tags": [
+          "Queries"
+        ],
+        "operationId": "getqueries",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/comments/add": {
+      "post": {
+        "summary": "add",
+        "tags": [
+          "comments"
+        ],
+        "operationId": "Postadd2",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/addrequest3"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/comments/getComments": {
+      "get": {
+        "summary": "get comments",
+        "tags": [
+          "comments"
+        ],
+        "operationId": "getcomments",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/comments/getComment/{id}": {
+      "get": {
+        "summary": "get comment by id",
+        "tags": [
+          "comments"
+        ],
+        "operationId": "getcommentbyid",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/comments/updateComment/{id}": {
+      "put": {
+        "summary": "updateBy id",
+        "tags": [
+          "comments"
+        ],
+        "operationId": "updateByid",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/updateByidRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/chats/getUserChat/{id}": {
+      "get": {
+        "summary": "get user chat",
+        "tags": [
+          "chats"
+        ],
+        "operationId": "getuserchat",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/chats/getAllChatUsers": {
+      "get": {
+        "summary": "get all chat userNames",
+        "tags": [
+          "chats"
+        ],
+        "operationId": "getallchatuserNames",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "addrequest": {
+      "title": "addrequest",
+      "example": {
+        "role": "USER",
+        "name": "Basavaraja",
+        "userId": "basavarajv.kumbar@gmail.com",
+        "password": "12345",
+        "phone": "8310616197"
+      },
+      "type": "object",
+      "properties": {
+        "role": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "role",
+        "name",
+        "userId",
+        "password",
+        "phone"
+      ]
+    },
+    "deleterequest": {
+      "title": "deleterequest",
+      "example": {
+        "userId": "vjcr96@gmail.com"
+      },
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "userId"
+      ]
+    },
+    "UpdateuserRequest": {
+      "title": "UpdateuserRequest",
+      "example": {
+        "name": "Basavaraja111"
+      },
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "addrequest1": {
+      "title": "addrequest1",
+      "example": {
+        "queryId": "62a4725a6699214f343f34cf"
+      },
+      "type": "object",
+      "properties": {
+        "queryId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "queryId"
+      ]
+    },
+    "updatestatusbymentorrequest": {
+      "title": "updatestatusbymentorrequest",
+      "example": {
+        "status": "INPROGRESS"
+      },
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "addrequest2": {
+      "title": "addrequest2",
+      "example": {
+        "title": "title1",
+        "description": "description1",
+        "studentId": "62a47cfb424e6f155cf5bd20"
+      },
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "studentId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "description",
+        "studentId"
+      ]
+    },
+    "addrequest3": {
+      "title": "addrequest3",
+      "example": {
+        "queryId": "62a4864e679619650c041295",
+        "content": "comment2"
+      },
+      "type": "object",
+      "properties": {
+        "queryId": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "queryId",
+        "content"
+      ]
+    },
+    "updateByidRequest": {
+      "title": "updateByidRequest",
+      "example": {
+        "content": "comment11232"
+      },
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "content"
+      ]
+    }
+  },
+  "security": [],
+  "tags": [
+    {
+      "name": "auth"
+    },
+    {
+      "name": "User apis"
+    },
+    {
+      "name": "tickets"
+    },
+    {
+      "name": "Queries"
+    },
+    {
+      "name": "comments"
+    },
+    {
+      "name": "chats"
+    }
+  ]
+}

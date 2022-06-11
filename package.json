@@ -2,7 +2,7 @@
   "name": "ineuron-bk-service",
   "version": "1.0.0",
   "description": "neuron query support",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "start": "npm run build:live",
     "build": "./node_modules/.bin/tsc -p .",
@@ -25,8 +25,7 @@
       "node_modules/**/*.css"
     ],
     "targets": [
-      "node14-linux-x64",
-      "node14-win-x64"
+      "node14-linux-x64"
     ],
     "outputPath": "dist"
   },
@@ -47,6 +46,7 @@
     "path": "0.12.7",
     "pkg": "^5.7.0",
     "socket.io": "^4.4.0",
+    "swagger-ui-express": "^4.4.0",
     "uniqid": "5.2.0"
   },
   "devDependencies": {

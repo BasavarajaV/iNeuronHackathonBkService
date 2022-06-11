@@ -5,36 +5,37 @@ import * as http from "http";
 import * as logger from "./models/logs";
 import * as Token from "./models/accesstoken";
 import * as Users from "./models/users";
-import { ResponseObj } from "./models/models"
+import { ResponseObj } from "./models/models";
 import passport from "passport";
 import BearerStrategy from "passport-http-bearer";
 import path from "path";
 import errorhandler from "errorhandler";
 var expressValidator = require("express-validator");
 require("dotenv").config();
-
+import swaggerUi from "swagger-ui-express";
+import swaggerDoc from "./swagger.json"
 import * as Socket from "./socket-io/index";
 
 import { DB } from "./models/db";
 
-const cors = require('cors')
+const cors = require("cors");
 
 const app = express();
 
 var corsOptions = {
-  origin: '*',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  origin: "*",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   allowedHeaders: [
-    'Origin',
-    'Authorization',
-    'X-Requested-With',
-    'Content-Type',
-    'Accept',
+    "Origin",
+    "Authorization",
+    "X-Requested-With",
+    "Content-Type",
+    "Accept",
   ],
   optionsSuccessStatus: 204,
-}
+};
 
-app.use(cors(corsOptions))
+app.use(cors(corsOptions));
 
 const server = http.createServer(app);
 const db = new DB();
@@ -67,17 +68,15 @@ app.use(
 );
 
 // init socket
-const io = require('socket.io')(server, {
+const io = require("socket.io")(server, {
   cors: {
-    origin: '*',
-    methods: ['GET', 'POST'],
-    allowedHeaders: ['my-custom-header'],
+    origin: "*",
+    methods: ["GET", "POST"],
+    allowedHeaders: ["my-custom-header"],
     credentials: true,
   },
-})
-Socket.initSocket(io)
-
-
+});
+Socket.initSocket(io);
 
 if ("development" === app.get("env")) {
   logger.info(
@@ -97,11 +96,11 @@ db.connectWithRetry(mongodbURI);
 passport.use(
   new BearerStrategy.Strategy(function (token, done) {
     console.log("token", token);
-    
+
     // logger.debug("Passport Token: " + token);
     Token.findByToken(token, function (err: Error, tokenFromDb: any) {
       console.log("tokenFromDb", tokenFromDb);
-      
+
       if (err) {
         let responseObj = new ResponseObj(401, "Unauthorized", undefined);
         return done(err, false, responseObj.toJsonString());
@@ -138,6 +137,14 @@ app.use(function (req, res, next) {
 
 //ROUTES
 
+var options = {
+  explorer: true,
+};
+app.use(
+  "/v1/api-docs",
+  swaggerUi.serveFiles(swaggerDoc, options),
+  swaggerUi.setup(swaggerDoc)
+);
 
 app.use("/v1/auth", require("./routes/v1/auth"));
 app.use("/v1/user", require("./routes/v1/user"));
@@ -146,8 +153,8 @@ app.use("/v1/queries", require("./routes/v1/queries"));
 app.use("/v1/comments", require("./routes/v1/comments"));
 app.use("/v1/chats", require("./routes/v1/chat"));
 
-app.use("/test", (req, res)=>{
-  return res.status(200).send("query seupport Bakcend API's are live")
+app.use("/test", (req, res) => {
+  return res.status(200).send("query seupport Bakcend API's are live");
 });
 
 //server static files
