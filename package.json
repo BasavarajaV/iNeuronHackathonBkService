@@ -1,5 +1,5 @@
 {
-  "name": "ineuron-query-support",
+  "name": "ineuron-bk-service",
   "version": "1.0.0",
   "description": "neuron query support",
   "main": "index.js",
@@ -14,6 +14,21 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/BasavarajaV/iNeuronHackathonBkService.git"
+  },
+  "bin": "lib/index.js",
+  "pkg": {
+    "scripts": [
+      "scripts/**/*.js"
+    ],
+    "assets": [
+      "node_modules/**/*.js",
+      "node_modules/**/*.css"
+    ],
+    "targets": [
+      "node14-linux-x64",
+      "node14-win-x64"
+    ],
+    "outputPath": "dist"
   },
   "dependencies": {
     "bcryptjs": "2.4.3",
@@ -30,8 +45,9 @@
     "passport-http-bearer": "1.0.1",
     "passport-local": "1.0.0",
     "path": "0.12.7",
-    "uniqid": "5.2.0",
-    "socket.io": "^4.4.0"
+    "pkg": "^5.7.0",
+    "socket.io": "^4.4.0",
+    "uniqid": "5.2.0"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
