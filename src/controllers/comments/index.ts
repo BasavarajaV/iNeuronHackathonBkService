@@ -4,6 +4,7 @@ import { Request, Response, NextFunction } from "express";
 import { ErrorCodes } from "../../models/models";
 import * as logger from "../../models/logs";
 import uniqid from "uniqid";
+import { ObjectId } from "mongodb";
 
 export function generateTicketId() {
   return uniqid("T");
@@ -15,7 +16,7 @@ export async function addComment(
   next: NextFunction
 ) {
   req.checkBody("queryId", "queryId is required").notEmpty();
-  req.checkBody("content ", "content  is required").notEmpty();
+  req.checkBody("content", "content  is required").notEmpty();
 
   var errors = req.validationErrors();
 
@@ -123,11 +124,11 @@ export async function getComments(
   }
 
   let query: any = {
-    queryId: queryId,
+    queryId: new ObjectId(queryId),
   };
 
   Comments.queryComment(query, {}, {}, (err: any, result: any) => {
-    console.log("err", err);
+    console.log("err11", err);
 
     if (err || !result) {
       req.apiStatus = {

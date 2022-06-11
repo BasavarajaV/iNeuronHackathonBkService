@@ -5,6 +5,7 @@ import { Request, Response, NextFunction } from "express";
 import { ErrorCodes } from "../../models/models";
 import * as logger from "../../models/logs";
 import uniqid from "uniqid";
+import { ObjectId } from "mongodb";
 
 export function generateTicketId() {
   return uniqid("T");
@@ -150,10 +151,31 @@ export async function getQueryByID(
       return;
     }
 
-    Comments.queryComment(
-      { queryId: id },
-      {},
-      {},
+    let aggArray = [
+      {
+        $match: {
+          queryId: new ObjectId(id),
+        },
+      },
+      {
+        $lookup: {
+          from: "users",
+          localField: "commentedUserId",
+          foreignField: "_id",
+          as: "commentedUesrInfo",
+        },
+      },
+      {
+        $unwind: {
+          path: "$commentedUesrInfo",
+          includeArrayIndex: "CommentedUesrInfoIndex",
+          preserveNullAndEmptyArrays: true,
+        },
+      },
+    ];
+
+    Comments.aggregateComment(
+      aggArray,
       (err: any, commentsForQueryId: any) => {
         if (err) {
           console.log("Failed to find comments");
