@@ -83,7 +83,7 @@ export async function getUserChat(
   }
 
   let query = {};
-  query["owener"] = req.user.id;
+  query["owner"] = req.user._id;
   query["contact"] = contactId;
 
   Chats.queryChat(query, {}, {}, (err: any, result: any) => {
