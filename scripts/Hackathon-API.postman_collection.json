@@ -459,6 +459,352 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Queries",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"title1\",\r\n    \"description\": \"description1\",\r\n    \"studentId\": \"62a47cfb424e6f155cf5bd20\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{bkUrl}}/queries/add",
+							"host": [
+								"{{bkUrl}}"
+							],
+							"path": [
+								"queries",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get query",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{bkUrl}}/queries/getQuery/:id",
+							"host": [
+								"{{bkUrl}}"
+							],
+							"path": [
+								"queries",
+								"getQuery",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "62a4864e679619650c041295"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get queries",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{bkUrl}}/queries/getQueries",
+							"host": [
+								"{{bkUrl}}"
+							],
+							"path": [
+								"queries",
+								"getQueries"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "comments",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"queryId\": \"62a4864e679619650c041295\",\r\n    \"content\": \"comment2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{bkUrl}}/comments/add",
+							"host": [
+								"{{bkUrl}}"
+							],
+							"path": [
+								"comments",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get comments",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"queryId\": \"62a4864e679619650c041295\",\r\n    \"content \": \"comment1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{bkUrl}}/comments/getComments",
+							"host": [
+								"{{bkUrl}}"
+							],
+							"path": [
+								"comments",
+								"getComments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get comment by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"queryId\": \"62a4864e679619650c041295\",\r\n    \"content \": \"comment1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{bkUrl}}/comments/getComment/:id",
+							"host": [
+								"{{bkUrl}}"
+							],
+							"path": [
+								"comments",
+								"getComment",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "62a496fb1f073065704ad972"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateBy id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\": \"comment11232\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{bkUrl}}/comments/updateComment/:id",
+							"host": [
+								"{{bkUrl}}"
+							],
+							"path": [
+								"comments",
+								"updateComment",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "62a496fb1f073065704ad972"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "chats",
+			"item": [
+				{
+					"name": "get user chat",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{bkUrl}}/chats/getUserChat/:id",
+							"host": [
+								"{{bkUrl}}"
+							],
+							"path": [
+								"chats",
+								"getUserChat",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "62a4aee682b3646904f0a207"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all chat userNames",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{bkUrl}}/chats/getAllChatUsers",
+							"host": [
+								"{{bkUrl}}"
+							],
+							"path": [
+								"chats",
+								"getAllChatUsers"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
@@ -484,7 +830,7 @@
 	"variable": [
 		{
 			"key": "bkUrl",
-			"value": "http://localhost:8000/v1"
+			"value": "http://13.233.178.114:8000/v1"
 		},
 		{
 			"key": "access_token",
