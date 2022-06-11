@@ -211,7 +211,7 @@ passport.authenticate("bearer", { session: false }),
 const jwtSecret = "J434dgeBPTsd5GsdGORD91C";
 function generateAndSaveAccessToken(req: any, user: any, cb: Function) {
   let token = jwt.sign({ email: user.email }, jwtSecret, {
-    expiresIn: AccessToken.TOKEN_EXPIRY * 60
+    expiresIn: AccessToken.TOKEN_EXPIRY * 60000
   });
 
   AccessToken.updateToken(token, user._id, function (err: Error, result: any) {

@@ -101,7 +101,8 @@ export async function updateUser(
     req.apiStatus = {
       isSuccess: false,
       error: ErrorCodes[1001],
-      data: "Missing user _id info",
+      customMsg: "Missing user _id info",
+      data: {},
     };
     next();
     return;

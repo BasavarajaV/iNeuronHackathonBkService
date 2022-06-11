@@ -3,7 +3,7 @@ import { Document, Schema, Model, model } from "mongoose";
 import { config } from "../config/config";
 
 // export const TOKEN_EXPIRY: number = 60 * 6; // 6 hours in Minutes
-export const TOKEN_EXPIRY: number = 60; // 6 hours in Minutes
+export const TOKEN_EXPIRY: number = 24 * 60 * 60 *1000; // 6 hours in Minutes
 
 export interface IAccessToken {
   token: string;

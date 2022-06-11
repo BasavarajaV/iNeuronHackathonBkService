@@ -12,6 +12,8 @@ export const ErrorCodes = {
   
     //11XX - Custom error codes redeclared to feeds, posts, comments, reactions etc...
     1101: { message: "This action is disabled", errorCode: 1101, statusCode: 400 },
+    1102: { message: "Exceptional error", errorCode: 1102, statusCode: 400 },
+    1103: { message: "Failed to varify", errorCode: 1103, statusCode: 400 },
     
   };
   
