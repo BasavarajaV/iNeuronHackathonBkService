@@ -1,0 +1,26 @@
+[[
+  {
+    "event": "CLIENT_SEND_MESSAGE-userId",
+    "payload": {
+        "FROM": "62a4aee682b3646904f0a207",
+        "TO": "62a44dabb6f7e30ceca471b2",
+        "message": "Hi hello",
+        "messageType": "text"
+    }
+  },
+  {
+    "event": "CLIENT_TYPING_MESSAGE-userId",
+    "payload": {
+        "FROM": "62a4aee682b3646904f0a207",
+        "TO": "62a44dabb6f7e30ceca471b2"
+    }
+  }
+],
+
+
+
+
+{
+"listeningEvent1": "SERVER_UPDATE_MESSAGE-userId",
+"listeningEvent2": "SERVER_UPDATE_CLIENT_MESSAGE_STATUS-userId"
+}]

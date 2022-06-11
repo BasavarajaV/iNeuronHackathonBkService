@@ -11,9 +11,13 @@ export enum STATUS {
 }
 
 export interface IChat {
-  fromId: Schema.ObjectId;
-  toId: Schema.ObjectId;
-  content: string;
+  // fromId: Schema.ObjectId;
+  // toId: Schema.ObjectId;
+  messageId: string;
+  owner: Schema.ObjectId;
+  contact: Schema.ObjectId;
+  direction: string;
+  message: string;
   messageType: string;
   mediaUrl: string;
   createdOn?: Date;
@@ -24,9 +28,12 @@ export interface IChatModel extends IChat, Document {}
 
 export const ChatSchema: Schema = new Schema(
   {
-    fromId: Schema.ObjectId,
-    toId: Schema.ObjectId,
-    content: {
+    // fromId: Schema.ObjectId,
+    // toId: Schema.ObjectId,
+    owner: Schema.ObjectId,
+    contact: Schema.ObjectId,
+    messageId: String,
+    message: {
       type: String,
     },
 
@@ -89,7 +96,10 @@ export var queryChat = (
 };
 
 export var createChat = function (chatObj: any, cb: Function) {
-  ChatModel.insertMany([chatObj], function (err, chat) {
+  if(chatObj && !chatObj.length){
+    chatObj = [chatObj]
+  }
+  ChatModel.insertMany(chatObj, function (err, chat) {
     cb(err, chat);
   });
 };

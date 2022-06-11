@@ -75,36 +75,36 @@ export function initSocket(io: any) {
       Message.findOne(
         { messageId: messageId },
         {},
-        { sort: { createdAt: -1 } },
+        { sort: { createdOn: -1 } },
         (err, info) => {
           Message.findOne(
             { messageId: messageId1 },
             {},
-            { sort: { createdAt: -1 } },
+            { sort: { createdOn: -1 } },
             (err, info1) => {
               if (info) {
                 console.log("info");
 
                 let obj = {
                   messageId: messageId,
-                  owener: new ObjectId(data.FROM),
+                  owner: new ObjectId(data.FROM),
                   contact: new ObjectId(data.TO),
                   direction: "To",
                   message: data.message,
                   messageType: data.message === "url" ? "url" : "text",
                   timestamp: new Date(),
-                  requestStatus: info.requestStatus,
+                  // requestStatus: info.requestStatus,
                 };
 
                 let obj1 = {
                   messageId: messageId,
-                  owener: new ObjectId(data.TO),
+                  owner: new ObjectId(data.TO),
                   contact: new ObjectId(data.FROM),
                   direction: "From",
                   message: data.message,
                   messageType: data.message === "url" ? "url" : "text",
                   timestamp: new Date(),
-                  requestStatus: info.requestStatus,
+                  // requestStatus: info.requestStatus,
                 };
 
                 addMessage([obj, obj1], (err: any, result) => {
@@ -119,24 +119,24 @@ export function initSocket(io: any) {
 
                 let obj = {
                   messageId: messageId,
-                  owener: new ObjectId(data.FROM),
+                  owner: new ObjectId(data.FROM),
                   contact: new ObjectId(data.TO),
                   direction: "To",
                   message: data.message,
                   messageType: data.message === "url" ? "url" : "text",
                   timestamp: new Date(),
-                  requestStatus: info1.requestStatus,
+                  // requestStatus: info1.requestStatus,
                 };
 
                 let obj1 = {
                   messageId: messageId,
-                  owener: new ObjectId(data.TO),
+                  owner: new ObjectId(data.TO),
                   contact: new ObjectId(data.FROM),
                   direction: "From",
                   message: data.message,
                   messageType: data.message === "url" ? "url" : "text",
                   timestamp: new Date(),
-                  requestStatus: info1.requestStatus,
+                  // requestStatus: info1.requestStatus,
                 };
 
                 addMessage([obj, obj1], (err: any, result) => {
@@ -149,23 +149,23 @@ export function initSocket(io: any) {
               } else {
                 let obj = {
                   messageId: messageId,
-                  owener: new ObjectId(data.FROM),
+                  owner: new ObjectId(data.FROM),
                   contact: new ObjectId(data.TO),
                   direction: "To",
                   message: data.message,
                   messageType: data.message === "url" ? "url" : "text",
                   timestamp: new Date(),
-                  requestStatus: "ACCEPTED",
+                  // requestStatus: "ACCEPTED",
                 };
 
                 let obj1 = {
                   messageId: messageId,
-                  owener: new ObjectId(data.TO),
+                  owner: new ObjectId(data.TO),
                   contact: new ObjectId(data.FROM),
                   direction: "From",
                   message: data.message,
                   messageType: data.message === "url" ? "url" : "text",
-                  requestStatus: "PENDING",
+                  // requestStatus: "PENDING",
                   timestamp: new Date(),
                 };
 
@@ -319,6 +319,8 @@ export function initSocket(io: any) {
 //==============================================================//
 
 function addMessage(userObj, cb) {
+  console.log("userObj", userObj);
+  
   Message.createChat(userObj, (err, result) => {
     if (err) {
       console.log("error:", err);
