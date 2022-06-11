@@ -1,0 +1,17 @@
+version: "3.7"
+services:
+  ineuron-bk-service:
+    image: ineuron-bk-service:latest
+    working_dir: /usr/src/ineuron-bk-service
+    container_name: ineuron-bk-service
+    ports:
+      - 8000:8000
+    logging:
+      driver: none
+    volumes:
+      - /var/log/ineuron-bk-service:/usr/src/ineuron-bk-service/logs
+      - /home/ubuntu/build:/usr/src/ineuron-bk-service
+    env_file:
+      - /home/ubuntu/bk-service/iNeuronHackathonBkService/ineuron-bk-service.env
+    environment:
+      - TZ=Asia/Kolkata
