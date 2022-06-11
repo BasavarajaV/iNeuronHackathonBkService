@@ -71,6 +71,12 @@ export var findById = function (id: Schema.Types.ObjectId, cb: Function) {
   });
 };
 
+export var findOne = function (query:any,projection:any,options:any, cb: Function) {
+  ChatModel.find(query, projection, options, (err, data) => {
+    cb(err, data);
+  });
+};
+
 export var queryChat = (
   query: any,
   projection: any,

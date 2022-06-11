@@ -13,9 +13,29 @@ import errorhandler from "errorhandler";
 var expressValidator = require("express-validator");
 require("dotenv").config();
 
+import * as Socket from "./socket-io/index";
+
 import { DB } from "./models/db";
 
+const cors = require('cors')
+
 const app = express();
+
+var corsOptions = {
+  origin: '*',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  allowedHeaders: [
+    'Origin',
+    'Authorization',
+    'X-Requested-With',
+    'Content-Type',
+    'Accept',
+  ],
+  optionsSuccessStatus: 204,
+}
+
+app.use(cors(corsOptions))
+
 const server = http.createServer(app);
 const db = new DB();
 const port = config.port || 8000;
@@ -45,6 +65,19 @@ app.use(
     },
   })
 );
+
+// init socket
+const io = require('socket.io')(server, {
+  cors: {
+    origin: '*',
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['my-custom-header'],
+    credentials: true,
+  },
+})
+Socket.initSocket(io)
+
+
 
 if ("development" === app.get("env")) {
   logger.info(
