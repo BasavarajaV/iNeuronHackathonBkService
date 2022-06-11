@@ -1,0 +1,56 @@
+{
+  "name": "ineuron-query-support",
+  "version": "1.0.0",
+  "description": "neuron query support",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run build:live",
+    "build": "./node_modules/.bin/tsc -p .",
+    "build-fr": "cd ..\\fr-service && npm run build && npm run generate",
+    "copy": "cd ..\\fr-service && XCOPY dist\\** ..\\bk-service\\public\\ /E/H/C/I/Y",
+    "build:live": "nodemon --watch 'src/**/*.ts' --exec \"ts-node\" src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BasavarajaV/iNeuronHackathonBkService.git"
+  },
+  "dependencies": {
+    "bcryptjs": "2.4.3",
+    "dotenv": "8.2.0",
+    "errorhandler": "1.5.1",
+    "express": "4.17.1",
+    "express-validator": "^5.3.0",
+    "fs": "0.0.1-security",
+    "jsonwebtoken": "8.5.1",
+    "moment": "^2.29.1",
+    "mongoose": "5.9.12",
+    "passport": "0.4.1",
+    "passport-http-bearer": "1.0.1",
+    "passport-local": "1.0.0",
+    "path": "0.12.7",
+    "uniqid": "5.2.0"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/errorhandler": "^1.5.0",
+    "@types/express": "^4.17.6",
+    "@types/jsonwebtoken": "^8.3.9",
+    "@types/mongodb": "^3.5.15",
+    "@types/mongoose": "^5.7.15",
+    "@types/node": "^13.13.4",
+    "@types/passport": "^1.0.3",
+    "@types/passport-http-bearer": "^1.0.35",
+    "@types/passport-local": "^1.0.33",
+    "nodemon": "2.0.3",
+    "ts-node": "8.10.1",
+    "ts-node-dev": "1.0.0-pre.44",
+    "typescript": "3.8.3"
+  },
+  "author": "Basavaraja",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BasavarajaV/iNeuronHackathonBkService/issues"
+  },
+  "homepage": "https://github.com/BasavarajaV/iNeuronHackathonBkService#readme"
+}

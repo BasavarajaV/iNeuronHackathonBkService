@@ -1,0 +1,380 @@
+{
+	"info": {
+		"_postman_id": "e96c7e41-c68e-4deb-b98f-ecea924bb647",
+		"name": "Hackathon-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "admin login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "admin@ineuron.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "admin@1234",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{bkUrl}}/auth/login",
+							"host": [
+								"{{bkUrl}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{bkUrl}}/auth/logout",
+							"host": [
+								"{{bkUrl}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user info",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{bkUrl}}/auth/user",
+							"host": [
+								"{{bkUrl}}"
+							],
+							"path": [
+								"auth",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refresh access token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "refresh_token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjM0MjEwNTQsImV4cCI6MTYyNjAxMzA1NH0.7H0NDP1AoWZB_K7SGdAhtLL6prp6g1COfqcsRQJbjTc",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{bkUrl}}/auth/refresh",
+							"host": [
+								"{{bkUrl}}"
+							],
+							"path": [
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "admin@ineuron.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "admin@1234",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{bkUrl}}/auth/login",
+							"host": [
+								"{{bkUrl}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User apis",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTQ5MjI1NDQsImV4cCI6MTY1NDkyNjE0NH0.qTbwYkrboeTDVSkyMQDqqEBFhJFE02kzVqutjzTZn2U",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"role\" : \"USER\",\r\n    \"name\" : \"Basavaraja\",\r\n    \"userId\" : \"basavarajv.kumbar@gmail.com\",\r\n    \"password\" : \"12345\",\r\n    \"phone\" : \"8310616197\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{bkUrl}}/user/add",
+							"host": [
+								"{{bkUrl}}"
+							],
+							"path": [
+								"user",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\":\"vjcr96@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{bkUrl}}/user/delete",
+							"host": [
+								"{{bkUrl}}"
+							],
+							"path": [
+								"user",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{bkUrl}}/user/all",
+							"host": [
+								"{{bkUrl}}"
+							],
+							"path": [
+								"user",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find one user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{bkUrl}}/user/findOne/:id",
+							"host": [
+								"{{bkUrl}}"
+							],
+							"path": [
+								"user",
+								"findOne",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "60c3732c927dd21814906579"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTQ5MjI4NzYsImV4cCI6MTY1NDkyNjQ3Nn0.oOYZ-fuXlZSCLGarFDcg1iF_nsLBFXnhvziMvX7gLhE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"Basavaraja111\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{bkUrl}}/user/update/:id",
+							"host": [
+								"{{bkUrl}}"
+							],
+							"path": [
+								"user",
+								"update",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "62a41d66dfac2a3f98fa18cb"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "bkUrl",
+			"value": "http://localhost:8000/v1"
+		},
+		{
+			"key": "access_token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTQ5MjIyMzUsImV4cCI6MTY1NDkyNTgzNX0.6cD61wDAMA2M3b6T2L0yeIvKPTgW9IkRl-_TeV4YhQk"
+		}
+	]
+}
