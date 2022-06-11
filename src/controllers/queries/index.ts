@@ -1,4 +1,5 @@
 import * as Queries from "../../models/queries";
+import * as Comments from "../../models/comments";
 import * as Tickets from "../../models/tickets";
 import { Request, Response, NextFunction } from "express";
 import { ErrorCodes } from "../../models/models";
@@ -120,9 +121,8 @@ export async function getQueryByID(
   res: Response,
   next: NextFunction
 ) {
+  console.log("req.params", req.params);
 
-    console.log("req.params", req.params);
-    
   let id = req.params.id || null;
 
   if (!id) {
@@ -150,12 +150,26 @@ export async function getQueryByID(
       return;
     }
 
-    req.apiStatus = {
-      isSuccess: true,
-      data: result,
-    };
-    next();
-    return;
+    Comments.queryComment(
+      { queryId: id },
+      {},
+      {},
+      (err: any, commentsForQueryId: any) => {
+        if (err) {
+          console.log("Failed to find comments");
+        }
+
+        req.apiStatus = {
+          isSuccess: true,
+          data: {
+            queryInfo: result,
+            comments: commentsForQueryId || [],
+          },
+        };
+        next();
+        return;
+      }
+    );
   });
 }
 

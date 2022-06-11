@@ -110,6 +110,7 @@ app.use("/v1/auth", require("./routes/v1/auth"));
 app.use("/v1/user", require("./routes/v1/user"));
 app.use("/v1/tickets", require("./routes/v1/tickets"));
 app.use("/v1/queries", require("./routes/v1/queries"));
+app.use("/v1/comments", require("./routes/v1/comments"));
 
 app.use("/test", (req, res)=>{
   return res.status(200).send("query seupport Bakcend API's are live")
