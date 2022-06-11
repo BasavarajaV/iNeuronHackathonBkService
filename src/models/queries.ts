@@ -4,6 +4,11 @@ import { config } from "../config/config";
 
 const saltRounds = 13;
 
+export enum STATUS {
+  PENDING = "PENDING",
+  INPROGRESS = "INPROGRESS",
+  COMPLETED = "COMPLETED",
+}
 
 export interface IQuery {
   title: string;
@@ -13,6 +18,7 @@ export interface IQuery {
   studentId: Schema.Types.ObjectId;
   mentorsInvolved: [string];
   primaryMentor: Schema.Types.ObjectId;
+  status: STATUS;
   createdOn?: Date;
   updatedOn?: Date;
 }
@@ -29,12 +35,17 @@ export const QuerySchema: Schema = new Schema(
       default: [],
     },
     docs: {
-        type: [String],
-        default: [],
-      },
+      type: [String],
+      default: [],
+    },
+    status: {
+      type: String,
+      enum: [STATUS.PENDING, STATUS.INPROGRESS, STATUS.COMPLETED],
+      default: STATUS.PENDING,
+    },
     primaryMentor: Schema.Types.ObjectId,
     studentId: Schema.Types.ObjectId,
-    
+
     createdOn: {
       type: Date,
       default: Date.now,

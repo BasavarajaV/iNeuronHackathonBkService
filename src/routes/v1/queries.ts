@@ -18,18 +18,26 @@ router.post(
 );
 
 router.get(
-  "/getQueriesForMentors",
+    "/getQuery/:id",
+    entryPoint,
+    passport.authenticate("bearer", { session: false }),
+    Queries.getQueryByID,
+    exitPoint
+  );
+
+router.get(
+  "/getQueries",
   entryPoint,
   passport.authenticate("bearer", { session: false }),
-  // Queries.getQueriesForMentors,
+  Queries.getQueries,
   exitPoint
 );
 
 router.put(
-  "/updateStatus/:id",
+  "/updateQuery/:id",
   entryPoint,
   passport.authenticate("bearer", { session: false }),
-  Queries.updateStatus,
+  Queries.updateQuery,
   exitPoint
 );
 

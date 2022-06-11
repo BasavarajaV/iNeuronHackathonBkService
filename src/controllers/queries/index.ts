@@ -51,34 +51,44 @@ export async function addQueries(
       return;
     }
 
-    createTicketEntry(payload, result, (err: any, response: any) => {
-      if (err) {
-        req.apiStatus = {
-          isSuccess: false,
-          error: ErrorCodes[1002],
-          customMsg: "Failed to create ticket",
-          data: {},
-        };
-        next();
-        return;
-      }
-      if (response) {
-        req.apiStatus = {
-          isSuccess: true,
-          customMsg: "Ticket created successfully",
-          data: {
-            ticketId: payload.ticketId,
-          },
-        };
-        next();
-        return;
-      }
-    });
+    req.apiStatus = {
+      isSuccess: true,
+      customMsg: "query created successfully",
+      data: {
+        ticketId: payload.ticketId,
+      },
+    };
+    next();
+    return;
+
+    // createTicketEntry(payload, result, (err: any, response: any) => {
+    //   if (err) {
+    //     req.apiStatus = {
+    //       isSuccess: false,
+    //       error: ErrorCodes[1002],
+    //       customMsg: "Failed to create ticket",
+    //       data: {},
+    //     };
+    //     next();
+    //     return;
+    //   }
+    //   if (response) {
+    //     req.apiStatus = {
+    //       isSuccess: true,
+    //       customMsg: "Ticket created successfully",
+    //       data: {
+    //         ticketId: payload.ticketId,
+    //       },
+    //     };
+    //     next();
+    //     return;
+    //   }
+    // });
   });
 }
 
 export function createTicketEntry(payload: any, queryEntry: any, cb: Function) {
-//   console.log("queryEntry", queryEntry);
+  //   console.log("queryEntry", queryEntry);
   queryEntry = JSON.parse(JSON.stringify(queryEntry[0]));
 
   if (!queryEntry._id) {
@@ -92,9 +102,7 @@ export function createTicketEntry(payload: any, queryEntry: any, cb: Function) {
     primaryMentor: payload.primaryMentor,
   };
 
-  
-
-//   console.log("ticketEntry", ticketEntry);
+  //   console.log("ticketEntry", ticketEntry);
 
   Tickets.createTicket(ticketEntry, (err: any, result: any) => {
     if (err || !result) {
@@ -107,8 +115,51 @@ export function createTicketEntry(payload: any, queryEntry: any, cb: Function) {
     return;
   });
 }
+export async function getQueryByID(
+  req: Request | any,
+  res: Response,
+  next: NextFunction
+) {
 
-export async function getTicketsForMentors(
+    console.log("req.params", req.params);
+    
+  let id = req.params.id || null;
+
+  if (!id) {
+    req.apiStatus = {
+      isSuccess: false,
+      error: ErrorCodes[1001],
+      customMsg: "primary id is missing",
+      data: {},
+    };
+    next();
+    return;
+  }
+
+  Queries.findById(id, (err: any, result: any) => {
+    console.log("err", err);
+
+    if (err || !result) {
+      req.apiStatus = {
+        isSuccess: false,
+        error: ErrorCodes[1002],
+        customMsg: "Failed to find ticket",
+        data: {},
+      };
+      next();
+      return;
+    }
+
+    req.apiStatus = {
+      isSuccess: true,
+      data: result,
+    };
+    next();
+    return;
+  });
+}
+
+export async function getQueries(
   req: Request | any,
   res: Response,
   next: NextFunction
@@ -130,7 +181,7 @@ export async function getTicketsForMentors(
     primaryMentor: mentorId,
   };
 
-  Tickets.queryTicket(query, {}, {}, (err: any, result: any) => {
+  Queries.queryQuery(query, {}, {}, (err: any, result: any) => {
     console.log("err", err);
 
     if (err || !result) {
@@ -184,7 +235,7 @@ export async function getuniqueTicketId() {
   return uniqueTicketId;
 }
 
-export async function updateStatus(
+export async function updateQuery(
   req: Request | any,
   res: Response,
   next: NextFunction
@@ -217,7 +268,7 @@ export async function updateStatus(
 
   let mentorId: any = req.user._id;
 
-  Tickets.findById(id, (err: any, ticket: any) => {
+  Queries.findById(id, (err: any, ticket: any) => {
     if (err || !ticket) {
       req.apiStatus = {
         isSuccess: false,
@@ -231,7 +282,7 @@ export async function updateStatus(
     if (ticket && ticket.primaryMentor && ticket.primaryMentor == mentorId) {
       ticket = JSON.parse(JSON.stringify(ticket));
 
-      Tickets.updateTicketById(id, payload, (err: any, result: any) => {
+      Queries.updateQueryById(id, payload, (err: any, result: any) => {
         console.log("err", err);
 
         if (err || !result) {
@@ -247,7 +298,7 @@ export async function updateStatus(
 
         req.apiStatus = {
           isSuccess: true,
-          customMsg: "Updated status successfully",
+          customMsg: "Updated query successfully",
           data: {},
         };
         next();
