@@ -141,10 +141,7 @@ router.post("/refresh", function (req: any, res: any) {
         let responseObj = new ResponseObj(401, "Unauthorized", null);
         return res.status(responseObj.status).json(responseObj);
       }
-      //refreshingUser = user;
-
-      //const user = refreshingUser;
-      //console.log(user);
+      
       let userJson: any = JSON.stringify(user);
       userJson = JSON.parse(userJson);
 

@@ -35,17 +35,4 @@ export function getCollectionObject(collectionName: string, schema: any) {
   return collection["model"];
 }
 
-// export function loadStaticCollection() {
-//   let staticCollections = ["users"];
 
-//   staticCollections.forEach((collectionName) => {
-//     let collection:any = {}
-//     collection["name"] = collectionName;
-//     collection["model"] = mongoose.model(
-//       collectionName,
-//       schema,
-//       collectionName
-//     );
-//     config.dynamicModels.push(collection);
-//   });
-// }

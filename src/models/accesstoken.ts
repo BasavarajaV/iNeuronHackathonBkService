@@ -42,13 +42,6 @@ var AccessTokenSchema: Schema = new Schema(
 export const AccessTokenModel: Model<IAccessTokenModel> =
   model<IAccessTokenModel>("accesstokens", AccessTokenSchema);
 
-// var outcome = findJsonInJsonArray(config.dynamicModels, "accesstokens", "name");
-// if (!outcome) {
-//   let obj: any = {};
-//   addJson(obj, "name", "accesstokens");
-//   addJson(obj, "model", AccessTokenModel);
-//   config.dynamicModels.push(obj);
-// }
 
 export let updateToken = function (
   token: string,

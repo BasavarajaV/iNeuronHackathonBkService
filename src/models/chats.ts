@@ -66,11 +66,6 @@ export const ChatModel: Model<IChatModel> = model<IChatModel>(
 );
 
 
-// export var findByChatId = function (chatId: string, cb: Function) {
-//   ChatModel.findOne({ email: chatId }, function (err, Ticket) {
-//     cb(err, Ticket);
-//   });
-// };
 
 export var findById = function (id: Schema.Types.ObjectId, cb: Function) {
   ChatModel.findById(id).exec(function (err, Ticket) {

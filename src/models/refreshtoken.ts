@@ -41,17 +41,6 @@ var RefreshTokenSchema: Schema = new Schema(
 export const RefreshTokenModel: Model<IRefreshTokenModel> =
   model<IRefreshTokenModel>("refreshtokens", RefreshTokenSchema);
 
-// var outcome = findJsonInJsonArray(
-//   config.dynamicModels,
-//   "refreshtokens",
-//   "name"
-// );
-// if (!outcome) {
-//   let obj: any = {};
-//   addJson(obj, "name", "refreshtokens");
-//   addJson(obj, "model", RefreshTokenModel);
-//   config.dynamicModels.push(obj);
-// }
 
 export let updateToken = function (
   token: string,

@@ -55,9 +55,15 @@ export function createUserOnStartUpOld() {
 export function createUserOnStartUp() {
   let userArray = [
     {
-      name: "Admin",
-      email: "admin@ineuron.com",
-      password: "admin@1234",
+      name: "Mentor1",
+      email: "mentor1@ineuron.com",
+      password: "mentor@1234",
+      role: Users.ROLE.MENTOR,
+    },
+    {
+      name: "Mentor2",
+      email: "mentor2@ineuron.com",
+      password: "mentor@1234",
       role: Users.ROLE.MENTOR,
     },
     {
