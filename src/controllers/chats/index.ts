@@ -5,6 +5,9 @@ import { ErrorCodes } from "../../models/models";
 import * as logger from "../../models/logs";
 import uniqid from "uniqid";
 import { ObjectId } from "mongodb";
+import { ROLE } from "../../models/users";
+
+import * as Users from "../../models/users"
 
 export function generateTicketId() {
   return uniqid("T");
@@ -134,69 +137,80 @@ export async function getAllChatUsers(
   //     queryId: queryId,
   //   };
 
-  let aggArray = [
-    {
-      $match: {
-        owner: new ObjectId(req.user._id),
-      },
-    },
-    {
-      $group: {
-        _id: "$contact",
-        message: {
-          $last: "$message",
-        },
-        messageType: {
-          $last: "$messageType",
-        },
-        timestamp: {
-          $last: "$createdOn",
-        },
-        // unreadCount: {
-        //   $sum: {
-        //     $cond: {
-        //       if: "$isRead",
-        //       then: 0,
-        //       else: 1,
-        //     },
-        //   },
-        // },
-        contact: {
-          $first: "$contact",
-        },
-      },
-    },
-    {
-      $lookup: {
-        from: "users",
-        localField: "contact",
-        foreignField: "_id",
-        as: "userInfo",
-      },
-    },
-    {
-      $unwind: {
-        path: "$userInfo",
-        includeArrayIndex: "userIndex",
-        preserveNullAndEmptyArrays: false,
-      },
-    },
-    {
-      $project: {
-        contactId: "$_id",
-        message: "$message",
-        messageType: "$messageType",
-        // timestamp: "$timestamp",
-        unreadCount: "$unreadCount",
-        username: "$userInfo.name",
-        // profilePicture: "$userInfo.profilePicture",
-        userIndex: "$userIndex",
-        profileIndex: "$profileIndex",
-      },
-    },
-  ];
+  // let aggArray = [
+  //   {
+  //     $match: {
+  //       owner: new ObjectId(req.user._id),
+  //     },
+  //   },
+  //   {
+  //     $group: {
+  //       _id: "$contact",
+  //       message: {
+  //         $last: "$message",
+  //       },
+  //       messageType: {
+  //         $last: "$messageType",
+  //       },
+  //       timestamp: {
+  //         $last: "$createdOn",
+  //       },
+  //       // unreadCount: {
+  //       //   $sum: {
+  //       //     $cond: {
+  //       //       if: "$isRead",
+  //       //       then: 0,
+  //       //       else: 1,
+  //       //     },
+  //       //   },
+  //       // },
+  //       contact: {
+  //         $first: "$contact",
+  //       },
+  //     },
+  //   },
+  //   {
+  //     $lookup: {
+  //       from: "users",
+  //       localField: "contact",
+  //       foreignField: "_id",
+  //       as: "userInfo",
+  //     },
+  //   },
+  //   {
+  //     $unwind: {
+  //       path: "$userInfo",
+  //       includeArrayIndex: "userIndex",
+  //       preserveNullAndEmptyArrays: false,
+  //     },
+  //   },
+  //   {
+  //     $project: {
+  //       contactId: "$_id",
+  //       message: "$message",
+  //       messageType: "$messageType",
+  //       // timestamp: "$timestamp",
+  //       unreadCount: "$unreadCount",
+  //       username: "$userInfo.name",
+  //       // profilePicture: "$userInfo.profilePicture",
+  //       userIndex: "$userIndex",
+  //       profileIndex: "$profileIndex",
+  //     },
+  //   },
+  // ];
 
-  Chats.aggregateChat(aggArray, (err: any, result: any) => {
+  let query = {}
+
+  if(req.user.role == ROLE.MENTOR){
+    query["role"] =  ROLE.STUDENT
+  } 
+
+  if(req.user.role == ROLE.STUDENT){
+    query["role"] =  ROLE.MENTOR
+  } 
+
+
+  Users.queryUser(query, {}, {}, (err: any, result: any) => {
     console.log("err", err);
 
     if (err || !result) {
