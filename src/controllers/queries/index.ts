@@ -172,26 +172,28 @@ export async function getQueryByID(
           preserveNullAndEmptyArrays: true,
         },
       },
+      {
+        $sort: {
+          createdAt: -1,
+        },
+      },
     ];
 
-    Comments.aggregateComment(
-      aggArray,
-      (err: any, commentsForQueryId: any) => {
-        if (err) {
-          console.log("Failed to find comments");
-        }
-
-        req.apiStatus = {
-          isSuccess: true,
-          data: {
-            queryInfo: result,
-            comments: commentsForQueryId || [],
-          },
-        };
-        next();
-        return;
+    Comments.aggregateComment(aggArray, (err: any, commentsForQueryId: any) => {
+      if (err) {
+        console.log("Failed to find comments");
       }
-    );
+
+      req.apiStatus = {
+        isSuccess: true,
+        data: {
+          queryInfo: result,
+          comments: commentsForQueryId || [],
+        },
+      };
+      next();
+      return;
+    });
   });
 }
 
