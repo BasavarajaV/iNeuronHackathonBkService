@@ -150,7 +150,7 @@ export async function getAllChatUsers(
           $last: "$messageType",
         },
         timestamp: {
-          $last: "$2022-06-11 15:29:04.968Z",
+          $last: "$createdOn",
         },
         // unreadCount: {
         //   $sum: {
@@ -188,7 +188,7 @@ export async function getAllChatUsers(
         messageType: "$messageType",
         // timestamp: "$timestamp",
         unreadCount: "$unreadCount",
-        username: "$userInfo.username",
+        username: "$userInfo.name",
         // profilePicture: "$userInfo.profilePicture",
         userIndex: "$userIndex",
         profileIndex: "$profileIndex",
