@@ -6,6 +6,7 @@ import { ErrorCodes } from "../../models/models";
 import * as logger from "../../models/logs";
 import uniqid from "uniqid";
 import { ObjectId } from "mongodb";
+import { ROLE } from "../../models/users";
 
 export function generateTicketId() {
   return uniqid("T");
@@ -202,9 +203,9 @@ export async function getQueries(
   res: Response,
   next: NextFunction
 ) {
-  let mentorId = req.user._id || null;
+  let userId = req.user._id || null;
 
-  if (!mentorId) {
+  if (!userId) {
     req.apiStatus = {
       isSuccess: false,
       error: ErrorCodes[1001],
@@ -215,9 +216,17 @@ export async function getQueries(
     return;
   }
 
-  let query: any = {
-    primaryMentor: mentorId,
-  };
+  // let query: any = {
+  //   primaryMentor: userId,
+  // };
+
+  let query:any= {}
+
+  if(req.user && req.user.role === ROLE.MENTOR){
+    query['primaryMentor'] = userId
+  }else {
+    query['studentId'] = userId
+  }
 
   Queries.queryQuery(query, {}, {}, (err: any, result: any) => {
     console.log("err", err);
